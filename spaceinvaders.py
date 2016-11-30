@@ -299,7 +299,7 @@ class SpaceInvaders(object):
 		self.enemyBullets = sprite.Group()
 		self.reset_lives()
 		self.make_enemies()
-		self.allBlockers = sprite.Group(self.make_blockers(0), self.make_blockers(1), self.make_blockers(2), self.make_blockers(3))
+		#self.allBlockers = sprite.Group(self.make_blockers(0), self.make_blockers(1), self.make_blockers(2), self.make_blockers(3))
 		self.keys = key.get_pressed()
 		self.clock = time.Clock()
 		self.timer = time.get_ticks()
@@ -536,9 +536,9 @@ class SpaceInvaders(object):
 			self.gameOver = True
 			self.startGame = False
 
-		sprite.groupcollide(self.bullets, self.allBlockers, True, True)
-		sprite.groupcollide(self.enemyBullets, self.allBlockers, True, True)
-		sprite.groupcollide(self.enemies, self.allBlockers, False, True)
+		#sprite.groupcollide(self.bullets, self.allBlockers, True, True)
+		#sprite.groupcollide(self.enemyBullets, self.allBlockers, True, True)
+		#sprite.groupcollide(self.enemies, self.allBlockers, False, True)
 
 	def create_new_ship(self, createShip, currentTime):
 		if createShip and (currentTime - self.shipTimer > 900):
@@ -599,7 +599,7 @@ class SpaceInvaders(object):
 					currentTime = time.get_ticks()
 					self.play_main_music(currentTime)              
 					self.screen.blit(self.background, (0,0))
-					self.allBlockers.update(self.screen)
+					#self.allBlockers.update(self.screen)
 					self.scoreText2 = Text(FONT, 20, str(self.score), GREEN, 85, 5)
 					self.scoreText.draw(self.screen)
 					self.scoreText2.draw(self.screen)
