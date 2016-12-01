@@ -294,8 +294,8 @@ class SpaceInvaders(object):
 		self.playerGroup = sprite.Group(self.player)
 		self.explosionsGroup = sprite.Group()
 		self.bullets = sprite.Group()
-		self.mysteryShip = Mystery()
-		self.mysteryGroup = sprite.Group(self.mysteryShip)
+		#self.mysteryShip = Mystery()
+		#self.mysteryGroup = sprite.Group(self.mysteryShip)
 		self.enemyBullets = sprite.Group()
 		self.reset_lives()
 		self.make_enemies()
@@ -363,7 +363,7 @@ class SpaceInvaders(object):
 		self.enemy1Text = Text(FONT, 25, "   =   10 pts", GREEN, 368, 270)
 		self.enemy2Text = Text(FONT, 25, "   =  20 pts", BLUE, 368, 320)
 		self.enemy3Text = Text(FONT, 25, "   =  30 pts", PURPLE, 368, 370)
-		self.enemy4Text = Text(FONT, 25, "   =  ?????", RED, 368, 420)
+		#self.enemy4Text = Text(FONT, 25, "   =  ?????", RED, 368, 420)
 		self.scoreText = Text(FONT, 20, "Score", WHITE, 5, 5)
 		self.livesText = Text(FONT, 20, "Lives ", WHITE, 640, 5)
 		
@@ -398,7 +398,7 @@ class SpaceInvaders(object):
 				enemies.add(enemy)
 		
 		self.enemies = enemies
-		self.allSprites = sprite.Group(self.player, self.enemies, self.livesGroup, self.mysteryShip)
+		self.allSprites = sprite.Group(self.player, self.enemies, self.livesGroup)#, self.mysteryShip)
 
 	def make_enemies_shoot(self):
 		columnList = []
@@ -443,12 +443,12 @@ class SpaceInvaders(object):
 		self.enemy2 = transform.scale(self.enemy2 , (40, 40))
 		self.enemy3 = IMAGES["enemy1_2"]
 		self.enemy3 = transform.scale(self.enemy3 , (40, 40))
-		self.enemy4 = IMAGES["mystery"]
-		self.enemy4 = transform.scale(self.enemy4 , (80, 40))
+		#self.enemy4 = IMAGES["mystery"]
+		#self.enemy4 = transform.scale(self.enemy4 , (80, 40))
 		self.screen.blit(self.enemy1, (318, 270))
 		self.screen.blit(self.enemy2, (318, 320))
 		self.screen.blit(self.enemy3, (318, 370))
-		self.screen.blit(self.enemy4, (299, 420))
+		#self.screen.blit(self.enemy4, (299, 420))
 
 		for e in event.get():
 			if e.type == QUIT:
@@ -488,21 +488,21 @@ class SpaceInvaders(object):
 					self.gameTimer = time.get_ticks()
 					break
 		
-		mysterydict = sprite.groupcollide(self.bullets, self.mysteryGroup, True, True)
-		if mysterydict:
-			for value in mysterydict.values():
-				for currentSprite in value:
-					currentSprite.mysteryEntered.stop()
-					self.sounds["mysterykilled"].play()
-					score = self.calculate_score(currentSprite.row)
-					explosion = Explosion(currentSprite.rect.x, currentSprite.rect.y, currentSprite.row, False, True, score)
-					self.explosionsGroup.add(explosion)
-					self.allSprites.remove(currentSprite)
-					self.mysteryGroup.remove(currentSprite)
-					newShip = Mystery()
-					self.allSprites.add(newShip)
-					self.mysteryGroup.add(newShip)
-					break
+		#mysterydict = sprite.groupcollide(self.bullets, self.mysteryGroup, True, True)
+		#if mysterydict:
+		#	for value in mysterydict.values():
+		#		for currentSprite in value:
+		#			currentSprite.mysteryEntered.stop()
+		#			self.sounds["mysterykilled"].play()
+		#			score = self.calculate_score(currentSprite.row)
+		#			explosion = Explosion(currentSprite.rect.x, currentSprite.rect.y, currentSprite.row, False, True, score)
+		#			self.explosionsGroup.add(explosion)
+		#			self.allSprites.remove(currentSprite)
+		#			self.mysteryGroup.remove(currentSprite)
+		#			newShip = Mystery()
+		#			self.allSprites.add(newShip)
+		#			self.mysteryGroup.add(newShip)
+		#			break
 
 		bulletsdict = sprite.groupcollide(self.enemyBullets, self.playerGroup, True, False)     
 		if bulletsdict:
@@ -575,7 +575,7 @@ class SpaceInvaders(object):
 				self.enemy1Text.draw(self.screen)
 				self.enemy2Text.draw(self.screen)
 				self.enemy3Text.draw(self.screen)
-				self.enemy4Text.draw(self.screen)
+				#self.enemy4Text.draw(self.screen)
 				self.create_main_menu()
 
 			elif self.startGame:
